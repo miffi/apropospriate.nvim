@@ -11,7 +11,7 @@ by [waymondo](https://github.com/waymondo).
 # Installation
 Using `packer.nvim`
 ```lua
-use {"miffi/aproprospriate.nvim", requires = {"rktjmp/lush.nvim"}}
+use {"miffi/apropospriate.nvim", requires = {"rktjmp/lush.nvim"}}
 ```
 
 # Usage
