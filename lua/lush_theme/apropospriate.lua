@@ -75,11 +75,11 @@ local theme = lush(function()
     Comment      { fg = base01 }, -- any comment
     ColorColumn  { bg = base02 }, -- used for the columns set with 'colorcolumn'
     Conceal      { fg = blue }, -- placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor       { bg = pink1 }, -- character under the cursor
+    Cursor       { bg = pink1, fg = yellow, gui = 'inverse' }, -- character under the cursor
     -- lCursor      { }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM     { }, -- like Cursor, but used when in IME mode |CursorIM|
-    -- CursorColumn { }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-    -- CursorLine   { }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorColumn { bg = base00plus2 }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
+    CursorLine   { CursorColumn }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
     -- Directory    { }, -- directory names (and other special names in listings)
     DiffAdd      { fg = green }, -- diff mode: Added line |diff.txt|
     DiffChange   { fg = indigo1 }, -- diff mode: Changed line |diff.txt|
@@ -90,29 +90,29 @@ local theme = lush(function()
     -- TermCursorNC { }, -- cursor in an unfocused terminal
     ErrorMsg     { fg = red, gui = 'bold' }, -- error messages on the command line
     VertSplit    { fg = base00plus2 }, -- the column separating vertically split windows
-    -- Folded       { }, -- line used for closed folds
+    Folded       { fg = base01 }, -- line used for closed folds
     -- FoldColumn   { }, -- 'foldcolumn'
     SignColumn   { bg = base00, fg = base02 }, -- column where |signs| are displayed
-    IncSearch    { fg = orange, bg = base00minus1 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-    -- Substitute   { }, -- |:substitute| replacement text highlighting
+    IncSearch    { fg = orange, bg = base01 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+    Substitute   { bg = yellow, fg = base00 }, -- |:substitute| replacement text highlighting
     LineNr       { fg = base01 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     CursorLineNr { LineNr }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-    -- MatchParen   { }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-    -- ModeMsg      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
+    MatchParen   { fg = red }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+    ModeMsg      { fg = cyan }, -- 'showmode' message (e.g., "-- INSERT -- ")
     -- MsgArea      { }, -- Area for messages and cmdline
     -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
-    -- MoreMsg      { }, -- |more-prompt|
-    -- NonText      { }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Normal       { bg = base00, fg = base03 }, -- normal text
+    MoreMsg      { }, -- |more-prompt|
+    NonText      { fg = cyan1 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+    Normal       { bg = 'none', fg = base03 }, -- normal text
     -- NormalFloat  { }, -- Normal text in floating windows.
     NormalNC     { Normal, fg = base03minus3 }, -- normal text in non-current windows
     Pmenu        { bg = base00plus2, fg = base03 }, -- Popup menu: normal item.
     PmenuSel     { Pmenu, bg = base00plus3 }, -- Popup menu: selected item.
     PmenuSbar    { Pmenu }, -- Popup menu: scrollbar.
     PmenuThumb   { PmenuSbar, bg = base01 }, -- Popup menu: Thumb of the scrollbar.
-    -- Question     { }, -- |hit-enter| prompt and yes/no questions
+    Question     { fg = green1 }, -- |hit-enter| prompt and yes/no questions
     -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-    -- Search       { }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
+    Search       { IncSearch }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
     -- SpecialKey   { }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
     -- SpellBad     { }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise. 
     -- SpellCap     { }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
@@ -123,11 +123,11 @@ local theme = lush(function()
     TabLine      { bg = base00minus2 }, -- tab pages line, not active tab page label
     TabLineFill  { bg = base00minus3 }, -- tab pages line, where there are no labels
     TabLineSel   { bg = base00plus1 }, -- tab pages line, active tab page label
-    -- Title        { }, -- titles for output from ":set all", ":autocmd" etc.
+    Title        { fg = blue, gui = 'bold' }, -- titles for output from ":set all", ":autocmd" etc.
     Visual       { bg = base00plus2 }, -- Visual mode selection
     -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
-    -- WarningMsg   { }, -- warning messages
-    Whitespace   { bg=base00minus1, fg = yellow}, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    WarningMsg   { fg = orange }, -- warning messages
+    Whitespace   { bg=base00minus2, fg = yellow}, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     -- WildMenu     { }, -- current match in 'wildmenu' completion
 
     -- These groups are not listed as default vim groups,
@@ -140,7 +140,7 @@ local theme = lush(function()
     String         { fg = green }, --   a string constant: "this is a string"
     -- Character      { }, --  a character constant: 'c', '\n'
     Number         { Normal }, --   a number constant: 234, 0xff
-    -- Boolean        { }, --  a boolean constant: TRUE, false
+    Boolean        { fg = red1 }, --  a boolean constant: TRUE, false
     -- Float          { }, --    a floating point constant: 2.3e10
 
     Identifier     { fg = teal }, -- (preferred) any variable name
@@ -187,36 +187,36 @@ local theme = lush(function()
     -- use these groups, or use their own. Consult your LSP client's
     -- documentation.
 
-    -- LspReferenceText                     { }, -- used for highlighting "text" references
-    -- LspReferenceRead                     { }, -- used for highlighting "read" references
-    -- LspReferenceWrite                    { }, -- used for highlighting "write" references
+    LspReferenceText                     { gui = 'underline', guisp = base02 }, -- used for highlighting "text" references
+    LspReferenceRead                     { LspReferenceText }, -- used for highlighting "read" references
+    LspReferenceWrite                    { LspReferenceText }, -- used for highlighting "write" references
 
-    -- LspDiagnosticsDefaultError           { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- LspDiagnosticsDefaultWarning         { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- LspDiagnosticsDefaultInformation     { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- LspDiagnosticsDefaultHint            { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    LspDiagnosticsDefaultError           { fg = red }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    LspDiagnosticsDefaultWarning         { fg = orange }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    LspDiagnosticsDefaultInformation     { fg = green }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    LspDiagnosticsDefaultHint            { fg = teal }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 
-    -- LspDiagnosticsVirtualTextError       { }, -- Used for "Error" diagnostic virtual text
-    -- LspDiagnosticsVirtualTextWarning     { }, -- Used for "Warning" diagnostic virtual text
-    -- LspDiagnosticsVirtualTextInformation { }, -- Used for "Information" diagnostic virtual text
-    -- LspDiagnosticsVirtualTextHint        { }, -- Used for "Hint" diagnostic virtual text
+    LspDiagnosticsVirtualTextError       { LspDiagnosticsDefaultError }, -- Used for "Error" diagnostic virtual text
+    LspDiagnosticsVirtualTextWarning     { LspDiagnosticsDefaultWarning }, -- Used for "Warning" diagnostic virtual text
+    LspDiagnosticsVirtualTextInformation { LspDiagnosticsDefaultInformation }, -- Used for "Information" diagnostic virtual text
+    LspDiagnosticsVirtualTextHint        { LspDiagnosticsDefaultHint }, -- Used for "Hint" diagnostic virtual text
 
     LspDiagnosticsUnderlineError         { fg = 'none', gui = 'none' }, -- Used to underline "Error" diagnostics
     LspDiagnosticsUnderlineWarning       { fg = 'none', gui = 'none' }, -- Used to underline "Warning" diagnostics
-    LspDiagnosticsUnderlineInformation   { }, -- Used to underline "Information" diagnostics
+    LspDiagnosticsUnderlineInformation   { fg = 'none', gui = 'none' }, -- Used to underline "Information" diagnostics
     LspDiagnosticsUnderlineHint          { fg = 'none', gui = 'none' }, -- Used to underline "Hint" diagnostics
 
-    -- LspDiagnosticsFloatingError          { }, -- Used to color "Error" diagnostic messages in diagnostics float
-    -- LspDiagnosticsFloatingWarning        { }, -- Used to color "Warning" diagnostic messages in diagnostics float
-    -- LspDiagnosticsFloatingInformation    { }, -- Used to color "Information" diagnostic messages in diagnostics float
-    -- LspDiagnosticsFloatingHint           { }, -- Used to color "Hint" diagnostic messages in diagnostics float
+    LspDiagnosticsFloatingError          { LspDiagnosticsDefaultError       }, -- Used to color "Error" diagnostic messages in diagnostics float
+    LspDiagnosticsFloatingWarning        { LspDiagnosticsDefaultWarning     }, -- Used to color "Warning" diagnostic messages in diagnostics float
+    LspDiagnosticsFloatingInformation    { LspDiagnosticsDefaultInformation }, -- Used to color "Information" diagnostic messages in diagnostics float
+    LspDiagnosticsFloatingHint           { LspDiagnosticsDefaultHint        }, -- Used to color "Hint" diagnostic messages in diagnostics float
 
-    LspDiagnosticsSignError              { Error }, -- Used for "Error" signs in sign column
-    LspDiagnosticsSignWarning            { fg = orange }, -- Used for "Warning" signs in sign column
-    LspDiagnosticsSignInformation        { fg = green }, -- Used for "Information" signs in sign column
-    LspDiagnosticsSignHint               { fg = teal }, -- Used for "Hint" signs in sign column
+    LspDiagnosticsSignError              { LspDiagnosticsDefaultError       }, -- Used for "Error" signs in sign column
+    LspDiagnosticsSignWarning            { LspDiagnosticsDefaultWarning     }, -- Used for "Warning" signs in sign column
+    LspDiagnosticsSignInformation        { LspDiagnosticsDefaultInformation }, -- Used for "Information" signs in sign column
+    LspDiagnosticsSignHint               { LspDiagnosticsDefaultHint        }, -- Used for "Hint" signs in sign column
 
-    -- LspCodeLens                          { }, -- Used to color the virtual text of the codelens
+    LspCodeLens                          { fg = purple1 }, -- Used to color the virtual text of the codelens
 
     -- These groups are for the neovim tree-sitter highlights.
     -- As of writing, tree-sitter support is a WIP, group names may change.
@@ -263,15 +263,15 @@ local theme = lush(function()
     -- TSSymbol             { };    -- For identifiers referring to symbols or atoms.
     -- TSType               { };    -- For types.
     -- TSTypeBuiltin        { };    -- For builtin types.
-    -- TSVariable           { };    -- Any variable name that does not have another highlight.
+    -- TSVariable           { fg = teal };    -- Any variable name that does not have another highlight.
     -- TSVariableBuiltin    { };    -- Variable names that are defined by the languages, like `this` or `self`.
 
     -- TSTag                { };    -- Tags like html tag names.
     -- TSTagDelimiter       { };    -- Tag delimiter like `<` `>` `/`
-    -- TSText               { };    -- For strings considered text in a markup language.
-    -- TSEmphasis           { };    -- For text to be represented with emphasis.
-    -- TSUnderline          { };    -- For text to be represented with an underline.
-    -- TSStrike             { };    -- For strikethrough text.
+    TSText               { Normal };    -- For strings considered text in a markup language.
+    TSEmphasis           { Italic };    -- For text to be represented with emphasis.
+    TSUnderline          { Underlined };    -- For text to be represented with an underline.
+    TSStrike             { fg = blue1, bg = base00minus3 };    -- For strikethrough text.
     -- TSTitle              { };    -- Text that is part of a title.
     -- TSLiteral            { };    -- Literal text.
     -- TSURI                { };    -- Any URI like a link or email.
