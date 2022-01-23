@@ -90,7 +90,7 @@ local theme = lush(function()
     -- TermCursorNC { }, -- cursor in an unfocused terminal
     ErrorMsg     { fg = red, gui = 'bold' }, -- error messages on the command line
     VertSplit    { fg = base00plus2 }, -- the column separating vertically split windows
-    Folded       { fg = base01 }, -- line used for closed folds
+    Folded       { fg = indigo1 }, -- line used for closed folds
     -- FoldColumn   { }, -- 'foldcolumn'
     SignColumn   { bg = base00, fg = base02 }, -- column where |signs| are displayed
     IncSearch    { fg = orange, bg = base01 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
@@ -123,11 +123,11 @@ local theme = lush(function()
     TabLine      { bg = base00minus2 }, -- tab pages line, not active tab page label
     TabLineFill  { bg = base00minus3 }, -- tab pages line, where there are no labels
     TabLineSel   { bg = base00plus1 }, -- tab pages line, active tab page label
-    Title        { fg = blue, gui = 'bold' }, -- titles for output from ":set all", ":autocmd" etc.
+    Title        { fg = teal }, -- titles for output from ":set all", ":autocmd" etc.
     Visual       { bg = base00plus2 }, -- Visual mode selection
     -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg   { fg = orange }, -- warning messages
-    Whitespace   { bg=base00minus2, fg = base02}, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    Whitespace   { bg=base00minus2, fg = base02 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     -- WildMenu     { }, -- current match in 'wildmenu' completion
 
     -- These groups are not listed as default vim groups,
@@ -229,7 +229,7 @@ local theme = lush(function()
     -- TSBoolean            { };    -- For booleans.
     -- TSCharacter          { };    -- For characters.
     -- TSComment            { };    -- For comment blocks.
-    -- TSConstructor        { };    -- For constructor calls and definitions: ` { }` in Lua, and Java constructors.
+    TSConstructor        { Delimiter };    -- For constructor calls and definitions: ` { }` in Lua, and Java constructors.
     -- TSConditional        { };    -- For keywords related to conditionnals.
     -- TSConstant           { };    -- For constants
     -- TSConstBuiltin       { };    -- For constant that are built in the language: `nil` in Lua.
