@@ -107,8 +107,8 @@ local theme = lush(function()
     -- NormalFloat  { }, -- Normal text in floating windows.
     NormalNC     { Normal, fg = base03minus3 }, -- normal text in non-current windows
     Pmenu        { bg = base00plus2, fg = base03 }, -- Popup menu: normal item.
-    PmenuSel     { Pmenu, bg = base00plus3 }, -- Popup menu: selected item.
-    PmenuSbar    { Pmenu }, -- Popup menu: scrollbar.
+    PmenuSel     { Pmenu, bg = base00minus2 }, -- Popup menu: selected item.
+    PmenuSbar    { Pmenu, bg = base00plus3  }, -- Popup menu: scrollbar.
     PmenuThumb   { PmenuSbar, bg = base01 }, -- Popup menu: Thumb of the scrollbar.
     Question     { fg = green1 }, -- |hit-enter| prompt and yes/no questions
     -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
