@@ -26,11 +26,9 @@ vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme apropospriate]])
 ```
 
-# Contributing
-This colorscheme is still in active development right now. Things are still
-missing, especially all of light mode. Please file issues if you find any bugs.
+---
 
-Additionally, as this is my first time ~~making~~ porting a colorscheme, and
+As this is my first time ~~making~~ porting a colorscheme, and
 the fact that emacs faces don't map evenly only nvim highlights, means that
 there might be some idiosyncrasies with color matching. Feel free to suggest
 better highlights to me, either via issues or by a message if you know me
