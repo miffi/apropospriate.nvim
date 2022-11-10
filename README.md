@@ -17,8 +17,8 @@ use {"miffi/apropospriate.nvim"}
 Inside `init.vim`
 ```vim
 colorscheme apropospriate-dark
--- Or use the light theme
--- colorscheme apropospriate-light
+" Or use the light theme
+" colorscheme apropospriate-light
 ```
 
 Inside `init.lua`
