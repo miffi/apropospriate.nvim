@@ -16,23 +16,25 @@ use {"miffi/apropospriate.nvim"}
 # Usage
 Inside `init.vim`
 ```vim
-set background=dark " or light if you want light mode
-colorscheme apropospriate
+colorscheme apropospriate-dark
+-- Or use the light theme
+-- colorscheme apropospriate-light
 ```
 
 Inside `init.lua`
 ```lua
-vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme apropospriate]])
+vim.api.nvim_command 'colorscheme apropospriate-dark'
+-- Or use the light theme
+-- vim.api.nvim_command 'colorscheme apropospriate-light'
 ```
 
 ---
 
-As this is my first time ~~making~~ porting a colorscheme, and
-the fact that emacs faces don't map evenly only nvim highlights, means that
-there might be some idiosyncrasies with color matching. Feel free to suggest
-better highlights to me, either via issues or by a message if you know me
-personally ^^.
+As this is my first time ~~making~~ porting a colorscheme, and the fact that
+emacs faces don't map evenly only nvim highlights, means that there might be
+some idiosyncrasies with color matching. Feel free to suggest better
+highlights, whether it be to match the original or to make the scheme fit nvim
+better ^^.
 
 # Screenshots
 ![Apropospriate dark theme image](https://i.postimg.cc/rF3NQ3fp/screenshot-2021-11-25-11-48-57.png)
