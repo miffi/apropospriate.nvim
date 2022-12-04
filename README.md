@@ -37,4 +37,5 @@ highlights, whether it be to match the original or to make the scheme fit nvim
 better ^^.
 
 # Screenshots
-![Apropospriate dark theme image](https://i.postimg.cc/rF3NQ3fp/screenshot-2021-11-25-11-48-57.png)
+![Apropospriate dark theme image](https://user-images.githubusercontent.com/22885077/205475848-ef334760-6b58-4ad9-871e-820d03db8121.png)
+![Apropospriate light theme image](https://user-images.githubusercontent.com/22885077/205475627-3fd732d3-be8a-45c5-a258-99194064f64c.png)
