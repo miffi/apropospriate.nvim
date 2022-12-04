@@ -25,7 +25,7 @@ local set_colors = function(colors)
   a.nvim_set_hl(0, "IncSearch", { fg = colors.orange, bg = colors.base1 }) -- 'incsearch' highlighting also used for the text replaced with ":s///c"
   a.nvim_set_hl(0, "Substitute", { bg = colors.yellow, fg = colors.base0 }) -- |:substitute| replacement text highlighting
   a.nvim_set_hl(0, "LineNr", { fg = colors.base1 }) -- Line number for ":number" and ":#" commands and when 'number' or 'relativenumber' option is set.
-  a.nvim_set_hl(0, "CursorLineNr", { link = "LineNr" }) -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+  a.nvim_set_hl(0, "CursorLineNr", { fg = colors.base2 }) -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
   a.nvim_set_hl(0, "MatchParen", { fg = colors.red }) -- The character under the cursor or just before it if it is a paired bracket and its match. |pi_paren.txt|
   a.nvim_set_hl(0, "ModeMsg", { fg = colors.cyan }) -- 'showmode' message e.g. "-- INSERT -- "
   -- a.nvim_set_hl(0, "MsgArea", {}) -- Area for messages and cmdline
@@ -47,7 +47,7 @@ local set_colors = function(colors)
   -- a.nvim_set_hl(0, "SpellCap", {}) -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
   -- a.nvim_set_hl(0, "SpellLocal", {}) -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
   -- a.nvim_set_hl(0, "SpellRare", {}) -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-  a.nvim_set_hl(0, "StatusLine", { bg = colors.base0minus3, fg = colors.base3 }) -- status line of current window
+  a.nvim_set_hl(0, "StatusLine", { bg = colors.base0minus1, fg = colors.base3 }) -- status line of current window
   a.nvim_set_hl(0, "StatusLineNC", { bg = colors.base0plus1, fg = colors.base3 }) -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
   a.nvim_set_hl(0, "TabLine", { bg = colors.base0minus2 }) -- tab pages line not active tab page label
   a.nvim_set_hl(0, "TabLineFill", { bg = colors.base0minus3 }) -- tab pages line where there are no labels

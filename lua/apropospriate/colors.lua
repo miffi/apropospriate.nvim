@@ -25,23 +25,23 @@ local colors_dark = {
   teal1 = "#4db6ac",
   green = "#c5e1a5",
   green1 = "#f4ff81",
-  base0minus1 = "#404040",
-  base0minus2 = "#3e3e3e",
-  base0minus3 = "#3b3b3b",
-  base0plus1 = "#474747",
-  base0plus2 = "#4b4b4b",
-  base0plus3 = "#585858",
+  base0minus1 = "#3a3a3a",
+  base0minus2 = "#323232",
+  base0minus3 = "#2a2a2a",
+  base0plus1 = "#494949",
+  base0plus2 = "#515151",
+  base0plus3 = "#595959",
   base3minus3 = "#c9c9c9",
-  flashing_color = "#ed588b",
+  flashing_color = "#ee758c",
+  highlight_line_color = "#444444",
 }
 
 colors_dark.light_emphasis = colors_dark.base0minus3
 colors_dark.light_emphasis1 = colors_dark.base0minus2
 colors_dark.light_emphasis2 = colors_dark.base0minus1
-colors_dark.highlight_line_color = colors_dark.base0plus1
 
 local colors_light = {
-  base0 = "#fafafa",
+  base0 = "#f5f5f5",
   base1 = "#90a4ae",
   base2 = "#78909c",
   base3 = "#546e7a",
@@ -67,19 +67,19 @@ local colors_light = {
   teal1 = "#00897b",
   green = "#66bb6a",
   green1 = "#558b2f",
-  base0minus1 = "#fafafa",
-  base0minus2 = "#fafafa",
-  base0minus3 = "#fafafa",
-  base0plus1 = "#f4f4f4",
-  base0plus2 = "#e6e6e6",
-  base0plus3 = "#dbdbdb",
+  base0minus1 = "#fbfbfb",
+  base0minus2 = "#fdfdfd",
+  base0minus3 = "#ffffff",
+  base0plus1 = "#f0f0f0",
+  base0plus2 = "#ebebeb",
+  base0plus3 = "#e6e6e6",
   base3minus3 = "#607e8c",
   flashing_color = "#f8bbd0",
+  highlight_line_color = "#eeeeee",
 }
 
 colors_light.light_emphasis = colors_light.base0plus3
 colors_light.light_emphasis1 = colors_light.base0plus2
 colors_light.light_emphasis2 = colors_light.base0plus1
-colors_light.highlight_line_color = colors_light.base0minus1
 
 return {colors_dark, colors_light}
