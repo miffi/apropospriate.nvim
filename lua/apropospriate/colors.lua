@@ -82,4 +82,4 @@ colors_light.light_emphasis = colors_light.base0plus3
 colors_light.light_emphasis1 = colors_light.base0plus2
 colors_light.light_emphasis2 = colors_light.base0plus1
 
-return {colors_dark, colors_light}
+return {dark = colors_dark, light = colors_light}

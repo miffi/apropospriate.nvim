@@ -8,24 +8,43 @@ This is a port of the
 by [waymondo](https://github.com/waymondo).
 
 # Installation
-Using `packer.nvim`
+Using [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
 use {"miffi/apropospriate.nvim"}
+```
+
+Using [lazy.nvim](https://github.com/folke/lazy.nvim) with full configuration
+as main colorscheme.
+```lua
+{
+  "miffi/apropospriate.nvim",
+  lazy = false,
+  priority = 1000, -- Ensure that the colorscheme loads before any other plugins
+  config = function()
+    vim.cmd.colorscheme("apropospriate")
+  end,
+},
 ```
 
 # Usage
 Inside `init.vim`
 ```vim
-colorscheme apropospriate-dark
-" Or use the light theme
-" colorscheme apropospriate-light
+set termguicolors
+" Manually set to dark theme
+set background=dark
+" Or set to light theme
+" set background=light
+colorscheme apropospriate
 ```
 
 Inside `init.lua`
 ```lua
-vim.api.nvim_command 'colorscheme apropospriate-dark'
--- Or use the light theme
--- vim.api.nvim_command 'colorscheme apropospriate-light'
+vim.o.termguicolors = true
+-- Manually set to dark theme
+vim.o.background = "dark"
+-- Or set to light theme
+-- vim.o.background = "light"
+vim.cmd.colorscheme("apropospriate")
 ```
 
 ---
