@@ -120,30 +120,31 @@ local set_colors = function(colors)
   a.nvim_set_hl(0, "LspReferenceRead", { link = "LspReferenceText" }) -- used for highlighting "read" references
   a.nvim_set_hl(0, "LspReferenceWrite", { link = "LspReferenceText" }) -- used for highlighting "write" references
 
-  a.nvim_set_hl(0, "LspDiagnosticsDefaultError", { fg = colors.red }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
-  a.nvim_set_hl(0, "LspDiagnosticsDefaultWarning", { fg = colors.orange }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
-  a.nvim_set_hl(0, "LspDiagnosticsDefaultInformation", { fg = colors.green }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
-  a.nvim_set_hl(0, "LspDiagnosticsDefaultHint", { fg = colors.teal }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
+  a.nvim_set_hl(0, "DiagnosticOk", { fg = colors.green }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
+  a.nvim_set_hl(0, "DiagnosticError", { fg = colors.red }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
+  a.nvim_set_hl(0, "DiagnosticWarn", { fg = colors.orange1 }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
+  a.nvim_set_hl(0, "DiagnosticInfo", { fg = colors.green1 }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
+  a.nvim_set_hl(0, "DiagnosticHint", { fg = colors.teal }) -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
 
-  a.nvim_set_hl(0, "LspDiagnosticsVirtualTextError", { link = "LspDiagnosticsDefaultError" }) -- Used for "Error" diagnostic virtual text
-  a.nvim_set_hl(0, "LspDiagnosticsVirtualTextWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used for "Warning" diagnostic virtual text
-  a.nvim_set_hl(0, "LspDiagnosticsVirtualTextInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used for "Information" diagnostic virtual text
-  a.nvim_set_hl(0, "LspDiagnosticsVirtualTextHint", { link = "LspDiagnosticsDefaultHint" }) -- Used for "Hint" diagnostic virtual text
+  -- a.nvim_set_hl(0, "LspDiagnosticsVirtualTextError", { link = "LspDiagnosticsDefaultError" }) -- Used for "Error" diagnostic virtual text
+  -- a.nvim_set_hl(0, "LspDiagnosticsVirtualTextWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used for "Warning" diagnostic virtual text
+  -- a.nvim_set_hl(0, "LspDiagnosticsVirtualTextInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used for "Information" diagnostic virtual text
+  -- a.nvim_set_hl(0, "LspDiagnosticsVirtualTextHint", { link = "LspDiagnosticsDefaultHint" }) -- Used for "Hint" diagnostic virtual text
 
-  a.nvim_set_hl(0, "LspDiagnosticsUnderlineError", { fg = "none" }) -- Used to underline "Error" diagnostics
-  a.nvim_set_hl(0, "LspDiagnosticsUnderlineWarning", { fg = "none" }) -- Used to underline "Warning" diagnostics
-  a.nvim_set_hl(0, "LspDiagnosticsUnderlineInformation", { fg = "none" }) -- Used to underline "Information" diagnostics
-  a.nvim_set_hl(0, "LspDiagnosticsUnderlineHint", { fg = "none" }) -- Used to underline "Hint" diagnostics
+  a.nvim_set_hl(0, "DiagnosticUnderlineError", { fg = "none" }) -- Used to underline "Error" diagnostics
+  a.nvim_set_hl(0, "DiagnosticUnderlineWarning", { fg = "none" }) -- Used to underline "Warning" diagnostics
+  a.nvim_set_hl(0, "DiagnosticUnderlineInformation", { fg = "none" }) -- Used to underline "Information" diagnostics
+  a.nvim_set_hl(0, "DiagnosticUnderlineHint", { fg = "none" }) -- Used to underline "Hint" diagnostics
 
-  a.nvim_set_hl(0, "LspDiagnosticsFloatingError", { link = "LspDiagnosticsDefaultError" }) -- Used to color "Error" diagnostic messages in diagnostics float
-  a.nvim_set_hl(0, "LspDiagnosticsFloatingWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used to color "Warning" diagnostic messages in diagnostics float
-  a.nvim_set_hl(0, "LspDiagnosticsFloatingInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used to color "Information" diagnostic messages in diagnostics float
-  a.nvim_set_hl(0, "LspDiagnosticsFloatingHint", { link = "LspDiagnosticsDefaultHint" }) -- Used to color "Hint" diagnostic messages in diagnostics float
+  -- a.nvim_set_hl(0, "LspDiagnosticsFloatingError", { link = "LspDiagnosticsDefaultError" }) -- Used to color "Error" diagnostic messages in diagnostics float
+  -- a.nvim_set_hl(0, "LspDiagnosticsFloatingWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used to color "Warning" diagnostic messages in diagnostics float
+  -- a.nvim_set_hl(0, "LspDiagnosticsFloatingInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used to color "Information" diagnostic messages in diagnostics float
+  -- a.nvim_set_hl(0, "LspDiagnosticsFloatingHint", { link = "LspDiagnosticsDefaultHint" }) -- Used to color "Hint" diagnostic messages in diagnostics float
 
-  a.nvim_set_hl(0, "LspDiagnosticsSignError", { link = "LspDiagnosticsDefaultError" }) -- Used for "Error" signs in sign column
-  a.nvim_set_hl(0, "LspDiagnosticsSignWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used for "Warning" signs in sign column
-  a.nvim_set_hl(0, "LspDiagnosticsSignInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used for "Information" signs in sign column
-  a.nvim_set_hl(0, "LspDiagnosticsSignHint", { link = "LspDiagnosticsDefaultHint" }) -- Used for "Hint" signs in sign column
+  -- a.nvim_set_hl(0, "LspDiagnosticsSignError", { link = "LspDiagnosticsDefaultError" }) -- Used for "Error" signs in sign column
+  -- a.nvim_set_hl(0, "LspDiagnosticsSignWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used for "Warning" signs in sign column
+  -- a.nvim_set_hl(0, "LspDiagnosticsSignInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used for "Information" signs in sign column
+  -- a.nvim_set_hl(0, "LspDiagnosticsSignHint", { link = "LspDiagnosticsDefaultHint" }) -- Used for "Hint" signs in sign column
 
   a.nvim_set_hl(0, "LspCodeLens", { fg = colors.purple1 }) -- Used to color the virtual text of the codelens
 
