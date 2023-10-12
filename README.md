@@ -3,7 +3,7 @@
 A colorful, low-contrast, light & dark theme set for nvim. It strives to be
 pleasant, clean, and consistent, with special focus for the current buffer.
 
-This is a port of the
+This is a port of the beautiful
 [apropospriate-theme](https://github.com/waymondo/apropospriate-theme) written
 by [waymondo](https://github.com/waymondo).
 
@@ -21,6 +21,7 @@ as main colorscheme.
   lazy = false,
   priority = 1000, -- Ensure that the colorscheme loads before any other plugins
   config = function()
+    vim.o.termguicolors = true
     vim.cmd.colorscheme("apropospriate")
   end,
 },
