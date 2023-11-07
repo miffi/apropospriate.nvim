@@ -1,215 +1,347 @@
 local colorschemes = require("apropospriate.colors")
 local theme = {}
 
+-- Nabbed from https://github.com/neovim/neovim/blob/master/src/nvim/highlight_group.c
+--
+-- static const char *highlight_init_both[] = {
+--   "Conceal      ctermbg=DarkGrey ctermfg=LightGrey guibg=DarkGrey guifg=LightGrey",
+--   "Cursor       guibg=fg guifg=bg",
+--   "lCursor      guibg=fg guifg=bg",
+--   "DiffText     cterm=bold ctermbg=Red gui=bold guibg=Red",
+--   "ErrorMsg     ctermbg=DarkRed ctermfg=White guibg=Red guifg=White",
+--   "IncSearch    cterm=reverse gui=reverse",
+--   "ModeMsg      cterm=bold gui=bold",
+--   "NonText      ctermfg=Blue gui=bold guifg=Blue",
+--   "Normal       cterm=NONE gui=NONE",
+--   "PmenuSbar    ctermbg=Grey guibg=Grey",
+--   "StatusLine   cterm=reverse,bold gui=reverse,bold",
+--   "StatusLineNC cterm=reverse gui=reverse",
+--   "TabLineFill  cterm=reverse gui=reverse",
+--   "TabLineSel   cterm=bold gui=bold",
+--   "TermCursor   cterm=reverse gui=reverse",
+--   "WinBar       cterm=bold gui=bold",
+--   "WildMenu     ctermbg=Yellow ctermfg=Black guibg=Yellow guifg=Black",
+--   "default link VertSplit Normal",
+--   "default link WinSeparator VertSplit",
+--   "default link WinBarNC WinBar",
+--   "default link EndOfBuffer NonText",
+--   "default link LineNrAbove LineNr",
+--   "default link LineNrBelow LineNr",
+--   "default link QuickFixLine Search",
+--   "default link CursorLineSign SignColumn",
+--   "default link CursorLineFold FoldColumn",
+--   "default link CurSearch Search",
+--   "default link PmenuKind Pmenu",
+--   "default link PmenuKindSel PmenuSel",
+--   "default link PmenuExtra Pmenu",
+--   "default link PmenuExtraSel PmenuSel",
+--   "default link Substitute Search",
+--   "default link Whitespace NonText",
+--   "default link MsgSeparator StatusLine",
+--   "default link NormalFloat Pmenu",
+--   "default link FloatBorder WinSeparator",
+--   "default link FloatTitle Title",
+--   "default link FloatFooter Title",
+--   "default FloatShadow blend=80 guibg=Black",
+--   "default FloatShadowThrough blend=100 guibg=Black",
+--   "RedrawDebugNormal cterm=reverse gui=reverse",
+--   "RedrawDebugClear ctermbg=Yellow guibg=Yellow",
+--   "RedrawDebugComposed ctermbg=Green guibg=Green",
+--   "RedrawDebugRecompose ctermbg=Red guibg=Red",
+--   "Error term=reverse cterm=NONE ctermfg=White ctermbg=Red gui=NONE guifg=White guibg=Red",
+--   "Todo term=standout cterm=NONE ctermfg=Black ctermbg=Yellow gui=NONE guifg=Blue guibg=Yellow",
+--   "default link String Constant",
+--   "default link Character Constant",
+--   "default link Number Constant",
+--   "default link Boolean Constant",
+--   "default link Float Number",
+--   "default link Function Identifier",
+--   "default link Conditional Statement",
+--   "default link Repeat Statement",
+--   "default link Label Statement",
+--   "default link Operator Statement",
+--   "default link Keyword Statement",
+--   "default link Exception Statement",
+--   "default link Include PreProc",
+--   "default link Define PreProc",
+--   "default link Macro PreProc",
+--   "default link PreCondit PreProc",
+--   "default link StorageClass Type",
+--   "default link Structure Type",
+--   "default link Typedef Type",
+--   "default link Tag Special",
+--   "default link SpecialChar Special",
+--   "default link Delimiter Special",
+--   "default link SpecialComment Special",
+--   "default link Debug Special",
+--   "default DiagnosticError ctermfg=1 guifg=Red",
+--   "default DiagnosticWarn ctermfg=3 guifg=Orange",
+--   "default DiagnosticInfo ctermfg=4 guifg=LightBlue",
+--   "default DiagnosticHint ctermfg=7 guifg=LightGrey",
+--   "default DiagnosticOk ctermfg=10 guifg=LightGreen",
+--   "default DiagnosticUnderlineError cterm=underline gui=underline guisp=Red",
+--   "default DiagnosticUnderlineWarn cterm=underline gui=underline guisp=Orange",
+--   "default DiagnosticUnderlineInfo cterm=underline gui=underline guisp=LightBlue",
+--   "default DiagnosticUnderlineHint cterm=underline gui=underline guisp=LightGrey",
+--   "default DiagnosticUnderlineOk cterm=underline gui=underline guisp=LightGreen",
+--   "default link DiagnosticVirtualTextError DiagnosticError",
+--   "default link DiagnosticVirtualTextWarn DiagnosticWarn",
+--   "default link DiagnosticVirtualTextInfo DiagnosticInfo",
+--   "default link DiagnosticVirtualTextHint DiagnosticHint",
+--   "default link DiagnosticVirtualTextOk DiagnosticOk",
+--   "default link DiagnosticFloatingError DiagnosticError",
+--   "default link DiagnosticFloatingWarn DiagnosticWarn",
+--   "default link DiagnosticFloatingInfo DiagnosticInfo",
+--   "default link DiagnosticFloatingHint DiagnosticHint",
+--   "default link DiagnosticFloatingOk DiagnosticOk",
+--   "default link DiagnosticSignError DiagnosticError",
+--   "default link DiagnosticSignWarn DiagnosticWarn",
+--   "default link DiagnosticSignInfo DiagnosticInfo",
+--   "default link DiagnosticSignHint DiagnosticHint",
+--   "default link DiagnosticSignOk DiagnosticOk",
+--   "default DiagnosticDeprecated cterm=strikethrough gui=strikethrough guisp=Red",
+--   "default link DiagnosticUnnecessary Comment",
+--   "default link LspInlayHint NonText",
+--
+--   // Text
+--   "default link @text.literal Comment",
+--   "default link @text.reference Identifier",
+--   "default link @text.title Title",
+--   "default link @text.uri Underlined",
+--   "default link @text.underline Underlined",
+--   "default link @text.todo Todo",
+--
+--   // Miscs
+--   "default link @comment Comment",
+--   "default link @punctuation Delimiter",
+--
+--   // Constants
+--   "default link @constant Constant",
+--   "default link @constant.builtin Special",
+--   "default link @constant.macro Define",
+--   "default link @define Define",
+--   "default link @macro Macro",
+--   "default link @string String",
+--   "default link @string.escape SpecialChar",
+--   "default link @string.special SpecialChar",
+--   "default link @character Character",
+--   "default link @character.special SpecialChar",
+--   "default link @number Number",
+--   "default link @boolean Boolean",
+--   "default link @float Float",
+--
+--   // Functions
+--   "default link @function Function",
+--   "default link @function.builtin Special",
+--   "default link @function.macro Macro",
+--   "default link @parameter Identifier",
+--   "default link @method Function",
+--   "default link @field Identifier",
+--   "default link @property Identifier",
+--   "default link @constructor Special",
+--
+--   // Keywords
+--   "default link @conditional Conditional",
+--   "default link @repeat Repeat",
+--   "default link @label Label",
+--   "default link @operator Operator",
+--   "default link @keyword Keyword",
+--   "default link @exception Exception",
+--
+--   "default link @variable Identifier",
+--   "default link @type Type",
+--   "default link @type.definition Typedef",
+--   "default link @storageclass StorageClass",
+--   "default link @namespace Identifier",
+--   "default link @include Include",
+--   "default link @preproc PreProc",
+--   "default link @debug Debug",
+--   "default link @tag Tag",
+--
+--   // LSP semantic tokens
+--   "default link @lsp.type.class Structure",
+--   "default link @lsp.type.comment Comment",
+--   "default link @lsp.type.decorator Function",
+--   "default link @lsp.type.enum Structure",
+--   "default link @lsp.type.enumMember Constant",
+--   "default link @lsp.type.function Function",
+--   "default link @lsp.type.interface Structure",
+--   "default link @lsp.type.macro Macro",
+--   "default link @lsp.type.method Function",
+--   "default link @lsp.type.namespace Structure",
+--   "default link @lsp.type.parameter Identifier",
+--   "default link @lsp.type.property Identifier",
+--   "default link @lsp.type.struct Structure",
+--   "default link @lsp.type.type Type",
+--   "default link @lsp.type.typeParameter TypeDef",
+--   "default link @lsp.type.variable Identifier",
+--
+--   NULL
+-- };
+--
+-- // Default colors only used with a light background.
+-- static const char *highlight_init_light[] = {
+--   "ColorColumn  ctermbg=LightRed guibg=LightRed",
+--   "CursorColumn ctermbg=LightGrey guibg=Grey90",
+--   "CursorLine   cterm=underline guibg=Grey90",
+--   "CursorLineNr cterm=underline ctermfg=Brown gui=bold guifg=Brown",
+--   "DiffAdd      ctermbg=LightBlue guibg=LightBlue",
+--   "DiffChange   ctermbg=LightMagenta guibg=LightMagenta",
+--   "DiffDelete   ctermfg=Blue ctermbg=LightCyan gui=bold guifg=Blue guibg=LightCyan",
+--   "Directory    ctermfg=DarkBlue guifg=Blue",
+--   "FoldColumn   ctermbg=Grey ctermfg=DarkBlue guibg=Grey guifg=DarkBlue",
+--   "Folded       ctermbg=Grey ctermfg=DarkBlue guibg=LightGrey guifg=DarkBlue",
+--   "LineNr       ctermfg=Brown guifg=Brown",
+--   "MatchParen   ctermbg=Cyan guibg=Cyan",
+--   "MoreMsg      ctermfg=DarkGreen gui=bold guifg=SeaGreen",
+--   "Pmenu        ctermbg=LightMagenta ctermfg=Black guibg=LightMagenta",
+--   "PmenuSel     ctermbg=LightGrey ctermfg=Black guibg=Grey",
+--   "PmenuThumb   ctermbg=Black guibg=Black",
+--   "Question     ctermfg=DarkGreen gui=bold guifg=SeaGreen",
+--   "Search       ctermbg=Yellow ctermfg=NONE guibg=Yellow guifg=NONE",
+--   "SignColumn   ctermbg=Grey ctermfg=DarkBlue guibg=Grey guifg=DarkBlue",
+--   "SpecialKey   ctermfg=DarkBlue guifg=Blue",
+--   "SpellBad     ctermbg=LightRed guisp=Red gui=undercurl",
+--   "SpellCap     ctermbg=LightBlue guisp=Blue gui=undercurl",
+--   "SpellLocal   ctermbg=Cyan guisp=DarkCyan gui=undercurl",
+--   "SpellRare    ctermbg=LightMagenta guisp=Magenta gui=undercurl",
+--   "TabLine      cterm=underline ctermfg=black ctermbg=LightGrey gui=underline guibg=LightGrey",
+--   "Title        ctermfg=DarkMagenta gui=bold guifg=Magenta",
+--   "Visual       guibg=LightGrey",
+--   "WarningMsg   ctermfg=DarkRed guifg=Red",
+--   "Comment      term=bold cterm=NONE ctermfg=DarkBlue ctermbg=NONE gui=NONE guifg=Blue guibg=NONE",
+--   "Constant     term=underline cterm=NONE ctermfg=DarkRed ctermbg=NONE gui=NONE guifg=Magenta guibg=NONE",
+--   "Special      term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=#6a5acd guibg=NONE",
+--   "Identifier   term=underline cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE",
+--   "Statement    term=bold cterm=NONE ctermfg=Brown ctermbg=NONE gui=bold guifg=Brown guibg=NONE",
+--   "PreProc      term=underline cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=#6a0dad guibg=NONE",
+--   "Type         term=underline cterm=NONE ctermfg=DarkGreen ctermbg=NONE gui=bold guifg=SeaGreen guibg=NONE",
+--   "Underlined   term=underline cterm=underline ctermfg=DarkMagenta gui=underline guifg=SlateBlue",
+--   "Ignore       term=NONE cterm=NONE ctermfg=white ctermbg=NONE gui=NONE guifg=bg guibg=NONE",
+--   NULL
+-- };
+--
+-- // Default colors only used with a dark background.
+-- static const char *highlight_init_dark[] = {
+--   "ColorColumn  ctermbg=DarkRed guibg=DarkRed",
+--   "CursorColumn ctermbg=DarkGrey guibg=Grey40",
+--   "CursorLine   cterm=underline guibg=Grey40",
+--   "CursorLineNr cterm=underline ctermfg=Yellow gui=bold guifg=Yellow",
+--   "DiffAdd      ctermbg=DarkBlue guibg=DarkBlue",
+--   "DiffChange   ctermbg=DarkMagenta guibg=DarkMagenta",
+--   "DiffDelete   ctermfg=Blue ctermbg=DarkCyan gui=bold guifg=Blue guibg=DarkCyan",
+--   "Directory    ctermfg=LightCyan guifg=Cyan",
+--   "FoldColumn   ctermbg=DarkGrey ctermfg=Cyan guibg=Grey guifg=Cyan",
+--   "Folded       ctermbg=DarkGrey ctermfg=Cyan guibg=DarkGrey guifg=Cyan",
+--   "LineNr       ctermfg=Yellow guifg=Yellow",
+--   "MatchParen   ctermbg=DarkCyan guibg=DarkCyan",
+--   "MoreMsg      ctermfg=LightGreen gui=bold guifg=SeaGreen",
+--   "Pmenu        ctermbg=Magenta ctermfg=Black guibg=Magenta",
+--   "PmenuSel     ctermbg=Black ctermfg=DarkGrey guibg=DarkGrey",
+--   "PmenuThumb   ctermbg=White guibg=White",
+--   "Question     ctermfg=LightGreen gui=bold guifg=Green",
+--   "Search       ctermbg=Yellow ctermfg=Black guibg=Yellow guifg=Black",
+--   "SignColumn   ctermbg=DarkGrey ctermfg=Cyan guibg=Grey guifg=Cyan",
+--   "SpecialKey   ctermfg=LightBlue guifg=Cyan",
+--   "SpellBad     ctermbg=Red guisp=Red gui=undercurl",
+--   "SpellCap     ctermbg=Blue guisp=Blue gui=undercurl",
+--   "SpellLocal   ctermbg=Cyan guisp=Cyan gui=undercurl",
+--   "SpellRare    ctermbg=Magenta guisp=Magenta gui=undercurl",
+--   "TabLine      cterm=underline ctermfg=white ctermbg=DarkGrey gui=underline guibg=DarkGrey",
+--   "Title        ctermfg=LightMagenta gui=bold guifg=Magenta",
+--   "Visual       guibg=DarkGrey",
+--   "WarningMsg   ctermfg=LightRed guifg=Red",
+--   "Comment      term=bold cterm=NONE ctermfg=Cyan ctermbg=NONE gui=NONE guifg=#80a0ff guibg=NONE",
+--   "Constant     term=underline cterm=NONE ctermfg=Magenta ctermbg=NONE gui=NONE guifg=#ffa0a0 guibg=NONE",
+--   "Special      term=bold cterm=NONE ctermfg=LightRed ctermbg=NONE gui=NONE guifg=Orange guibg=NONE",
+--   "Identifier   term=underline cterm=bold ctermfg=Cyan ctermbg=NONE gui=NONE guifg=#40ffff guibg=NONE",
+--   "Statement    term=bold cterm=NONE ctermfg=Yellow ctermbg=NONE gui=bold guifg=#ffff60 guibg=NONE",
+--   "PreProc      term=underline cterm=NONE ctermfg=LightBlue ctermbg=NONE gui=NONE guifg=#ff80ff guibg=NONE",
+--   "Type         term=underline cterm=NONE ctermfg=LightGreen ctermbg=NONE gui=bold guifg=#60ff60 guibg=NONE",
+--   "Underlined   term=underline cterm=underline ctermfg=LightBlue gui=underline guifg=#80a0ff",
+--   "Ignore       term=NONE cterm=NONE ctermfg=black ctermbg=NONE gui=NONE guifg=bg guibg=NONE",
+--   NULL
+-- };
+
 theme.setup = function(background)
-  local colors = colorschemes[background]
+	local colors = colorschemes[background]
 
 	return {
-		Comment = { fg = colors.base1 }, -- any comment
-		ColorColumn = { bg = colors.base2 }, -- used for the columns set with 'colorcolumn'
-		Conceal = { fg = colors.blue }, -- placeholder characters substituted for concealed text see 'conceallevel'
-		Cursor = { bg = colors.pink1, fg = colors.yellow }, -- character under the cursor
-		-- highlight("lCursor", {}) -- the character under the cursor when |language-mapping| is used see 'guicursor'
-		-- highlight("CursorIM", {}) -- like Cursor but used when in IME mode |CursorIM|
-		CursorColumn = { bg = colors.base0plus2 }, -- Screen-column at the cursor when 'cursorcolumn' is set.
-		CursorLine = { link = "CursorColumn" }, -- Screen-line at the cursor when 'cursorline' is set.  Low-priority if foreground ctermfg OR guifg is not set.
-		-- highlight("Directory", {}) -- directory names and other special names in listings
-		DiffAdd = { fg = colors.green }, -- diff mode: Added line |diff.txt|
-		DiffChange = { fg = colors.indigo1 }, -- diff mode: Changed line |diff.txt|
-		DiffDelete = { fg = colors.red }, -- diff mode: Deleted line |diff.txt|
-		-- highlight("DiffText", {}) -- diff mode: Changed text within a changed line |diff.txt|
-		-- highlight("EndOfBuffer", {}) -- filler lines ~ after the end of the buffer.  By default this is highlighted like |hl-NonText|.
-		-- highlight("TermCursor", {}) -- cursor in a focused terminal
-		-- highlight("TermCursorNC", {}) -- cursor in an unfocused terminal
-		ErrorMsg = { fg = colors.red, bold = 1 }, -- error messages on the command line
-		VertSplit = { fg = colors.base0plus2 }, -- the column separating vertically split windows
-		Folded = { fg = colors.base1 }, -- line used for closed folds
-		-- highlight("FoldColumn", {}) -- 'foldcolumn'
-		SignColumn = { bg = colors.base0, fg = colors.base2 }, -- column where |signs| are displayed
-		IncSearch = { fg = colors.orange, bg = colors.base1 }, -- 'incsearch' highlighting also used for the text replaced with ":s///c"
-		Substitute = { bg = colors.yellow, fg = colors.base0 }, -- |:substitute| replacement text highlighting
-		LineNr = { fg = colors.base1 }, -- Line number for ":number" and ":#" commands and when 'number' or 'relativenumber' option is set.
-		CursorLineNr = { fg = colors.base2 }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-		MatchParen = { underline = true }, -- The character under the cursor or just before it if it is a paired bracket and its match. |pi_paren.txt|
-		ModeMsg = {}, -- 'showmode' message e.g. "-- INSERT -- "
-		-- highlight("MsgArea", {}) -- Area for messages and cmdline
-		-- highlight("MsgSeparator", {}) -- Separator for scrolled messages `msgsep` flag of 'display'
-		-- highlight("MoreMsg", {}) -- |more-prompt|
-		NonText = { link = "Comment" }, -- '@' at the end of the window characters from 'showbreak' and other characters that do not really exist in the text e.g. ">" displayed when a double-wide character doesn't fit at the end of the line. See also |hl-EndOfBuffer|.
-		Normal = { bg = colors.base0, fg = colors.base3 }, -- normal text
-		-- highlight("NormalFloat", {}) -- Normal text in floating windows.
-		NormalNC = { fg = colors.base3minus3 }, -- normal text in non-current windows
-		Pmenu = { bg = colors.base0plus2, fg = colors.base3 }, -- Popup menu: normal item.
-		PmenuSel = { bg = colors.base0minus2 }, -- Popup menu: selected item.
-		PmenuSbar = { bg = colors.base0plus3 }, -- Popup menu: scrollbar.
-		PmenuThumb = { bg = colors.base1 }, -- Popup menu: Thumb of the scrollbar.
-		Question = { fg = colors.green }, -- |hit-enter| prompt and yes/no questions
-		-- highlight("QuickFixLine", {}) -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-		Search = { link = "IncSearch" }, -- Last search pattern highlighting see 'hlsearch'.  Also used for similar items that need to stand out.
-		-- highlight("SpecialKey", {}) -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
-		-- highlight("SpellBad", {}) -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-		-- highlight("SpellCap", {}) -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-		-- highlight("SpellLocal", {}) -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-		-- highlight("SpellRare", {}) -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-		StatusLine = { bg = colors.base0minus1 }, -- status line of current window
-		StatusLineNC = { bg = colors.base0plus1 }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-		TabLine = { bg = colors.base0minus2 }, -- tab pages line not active tab page label
-		TabLineFill = { bg = colors.base0minus3 }, -- tab pages line where there are no labels
-		TabLineSel = { bg = colors.base0plus1 }, -- tab pages line active tab page label
-		Title = { fg = colors.teal }, -- titles for output from ":set all" ":autocmd" etc.
-		Visual = { bg = colors.base0plus2 }, -- Visual mode selection
-		-- highlight("VisualNOS", {}) -- Visual mode selection when vim is "Not Owning the Selection".
-		WarningMsg = { fg = colors.orange1 }, -- warning messages
-		Whitespace = { bg = colors.base0minus2, fg = colors.base2 }, -- "nbsp" "space" "tab" and "trail" in 'listchars'
-		-- highlight("WildMenu", {}) -- current match in 'wildmenu' completion
-
-		-- These groups are not listed as default vim groups,
-		-- but they are defacto standard group names for syntax highlighting.
-		-- commented out groups should chain up to their "preferred" group by
-		-- default.
-		-- Uncomment and edit if you want more specific syntax highlighting.
-
-		Constant = { fg = colors.indigo }, -- preferred any constant
-		String = { fg = colors.green }, --   a string constant: "this is a string"
-		-- highlight("Character", {}) --  a character constant: 'c' '\n'
-		Number = { link = "Normal" }, --   a number constant: 234 0xff
-		Boolean = { fg = colors.red1 }, --  a boolean constant: TRUE false
-		-- highlight("Float", {}) --    a floating point constant: 2.3e10
-
-		Identifier = { fg = colors.teal }, -- preferred any variable name
-		Function = { fg = colors.blue }, -- function name also: methods for classes
-
-		Statement = { fg = colors.purple }, -- preferred any statement
-		-- highlight("Conditional", {}) --  if then else endif switch etc.
-		-- highlight("Repeat", {}) --   for do while etc.
-		-- highlight("Label", {}) --    case default etc.
-		-- highlight("Operator", {}) -- "sizeof" "+" "*" etc.
-		-- highlight("Keyword", {}) --  any other keyword
-		-- highlight("Exception", {}) --  try catch throw
-
-		PreProc = { fg = colors.blue1 }, -- preferred generic Preprocessor
-		-- highlight("Include", {}) --  preprocessor #include
-		-- highlight("Define", {}) --   preprocessor #define
-		-- highlight("Macro", {}) --    same as Define
-		-- highlight("PreCondit", {}) --  preprocessor #if #else #endif etc.
-
-		Type = { fg = colors.orange }, -- preferred int long char etc.
-		-- highlight("StorageClass", {}) -- static register volatile etc.
-		-- highlight("Structure", {}) --  struct union enum etc.
-		-- highlight("Typedef", {}) --  A typedef
-
-		Special = { fg = colors.blue }, -- preferred any special symbol
-		SpecialChar = { fg = colors.indigo }, --  special character in a constant
-		Tag = { fg = colors.cyan1 }, --    you can use CTRL-] on this
-		Delimiter = { fg = colors.base2 }, --  character that needs attention
-		SpecialComment = { fg = colors.purple1 }, -- special things inside a comment
-		Debug = { fg = colors.teal1 }, --    debugging statements
-
-		Underlined = { underline = 1 }, -- preferred text that stands out HTML links
+		Comment = { fg = colors.base1 },
+		ColorColumn = { bg = colors.base2 },
+		Conceal = { fg = colors.blue },
+		Cursor = { bg = colors.pink1, fg = colors.yellow },
+		CursorColumn = { bg = colors.base0plus2 },
+		CursorLine = { link = "CursorColumn" },
+		DiffAdd = { fg = colors.green },
+		DiffChange = { fg = colors.indigo1 },
+		DiffDelete = { fg = colors.red },
+		ErrorMsg = { fg = colors.red, bold = 1 },
+		VertSplit = { fg = colors.base0plus2 },
+		Folded = { fg = colors.base1 },
+		SignColumn = { bg = colors.base0, fg = colors.base2 },
+		IncSearch = { fg = colors.orange, bg = colors.base1 },
+		Substitute = { bg = colors.yellow, fg = colors.base0 },
+		LineNr = { fg = colors.base1 },
+		CursorLineNr = { fg = colors.base2 },
+		MatchParen = { underline = true },
+		ModeMsg = {},
+		NonText = { link = "Comment" },
+		Normal = { bg = colors.base0, fg = colors.base3 },
+		NormalNC = { fg = colors.base3minus3 },
+		Pmenu = { bg = colors.base0plus2, fg = colors.base3 },
+		PmenuSel = { bg = colors.base0minus2 },
+		PmenuSbar = { bg = colors.base0plus3 },
+		PmenuThumb = { bg = colors.base1 },
+		Question = { fg = colors.green },
+		Search = { link = "IncSearch" },
+		StatusLine = { bg = colors.base0minus1 },
+		StatusLineNC = { bg = colors.base0plus1 },
+		TabLine = { bg = colors.base0minus2 },
+		TabLineFill = { bg = colors.base0minus3 },
+		TabLineSel = { bg = colors.base0plus1 },
+		Title = { fg = colors.teal },
+		Visual = { bg = colors.base0plus2 },
+		WarningMsg = { fg = colors.orange1 },
+		Whitespace = { bg = colors.base0minus2, fg = colors.base2 },
+		Constant = { fg = colors.indigo },
+		String = { fg = colors.green },
+		Number = { link = "Normal" },
+		Boolean = { fg = colors.red1 },
+		Identifier = { fg = colors.teal },
+		Function = { fg = colors.blue },
+		Statement = { fg = colors.purple },
+		PreProc = { fg = colors.blue1 },
+		Type = { fg = colors.orange },
+		Special = { fg = colors.blue },
+		SpecialChar = { fg = colors.indigo },
+		Tag = { fg = colors.cyan1 },
+		Delimiter = { fg = colors.base2 },
+		SpecialComment = { fg = colors.purple1 },
+		Debug = { fg = colors.teal1 },
+		Underlined = { underline = 1 },
 		Bold = { bold = 1 },
 		Italic = { italic = 1 },
-
-		-- "Ignore" below may be invisible...
-		-- highlight("Ignore", {}) -- preferred left blank hidden  |hl-Ignore|
-
-		Error = { link = "ErrorMsg" }, -- preferred any erroneous construct
-
-		Todo = { fg = colors.yellow1 }, -- preferred anything that needs extra attention mostly the keywords TODO FIXME and XXX
-
-		-- These groups are for the native LSP client. Some other LSP clients may
-		-- use these groups or use their own. Consult your LSP client's
-		-- documentation.
-
-		LspReferenceText = { underline = 1 }, -- used for highlighting "text" references
-		LspReferenceRead = { link = "LspReferenceText" }, -- used for highlighting "read" references
-		LspReferenceWrite = { link = "LspReferenceText" }, -- used for highlighting "write" references
-		-- highlight("LSPInlayHint", { link = "Comment" })
-
-		DiagnosticOk = { fg = colors.green }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
-		DiagnosticError = { fg = colors.red }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
-		DiagnosticWarn = { fg = colors.orange1 }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
-		DiagnosticInfo = { fg = colors.green1 }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
-		DiagnosticHint = { fg = colors.teal }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default except Underline
-
-		-- highlight("LspDiagnosticsVirtualTextError", { link = "LspDiagnosticsDefaultError" }) -- Used for "Error" diagnostic virtual text
-		-- highlight("LspDiagnosticsVirtualTextWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used for "Warning" diagnostic virtual text
-		-- highlight("LspDiagnosticsVirtualTextInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used for "Information" diagnostic virtual text
-		-- highlight("LspDiagnosticsVirtualTextHint", { link = "LspDiagnosticsDefaultHint" }) -- Used for "Hint" diagnostic virtual text
-
-		DiagnosticUnderlineError = { fg = "none" }, -- Used to underline "Error" diagnostics
-		DiagnosticUnderlineWarning = { fg = "none" }, -- Used to underline "Warning" diagnostics
-		DiagnosticUnderlineInformation = { fg = "none" }, -- Used to underline "Information" diagnostics
-		DiagnosticUnderlineHint = { fg = "none" }, -- Used to underline "Hint" diagnostics
-
-		-- highlight("LspDiagnosticsFloatingError", { link = "LspDiagnosticsDefaultError" }) -- Used to color "Error" diagnostic messages in diagnostics float
-		-- highlight("LspDiagnosticsFloatingWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used to color "Warning" diagnostic messages in diagnostics float
-		-- highlight("LspDiagnosticsFloatingInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used to color "Information" diagnostic messages in diagnostics float
-		-- highlight("LspDiagnosticsFloatingHint", { link = "LspDiagnosticsDefaultHint" }) -- Used to color "Hint" diagnostic messages in diagnostics float
-
-		-- highlight("LspDiagnosticsSignError", { link = "LspDiagnosticsDefaultError" }) -- Used for "Error" signs in sign column
-		-- highlight("LspDiagnosticsSignWarning", { link = "LspDiagnosticsDefaultWarning" }) -- Used for "Warning" signs in sign column
-		-- highlight("LspDiagnosticsSignInformation", { link = "LspDiagnosticsDefaultInformation" }) -- Used for "Information" signs in sign column
-		-- highlight("LspDiagnosticsSignHint", { link = "LspDiagnosticsDefaultHint" }) -- Used for "Hint" signs in sign column
-
-		LspCodeLens = { fg = colors.purple1 }, -- Used to color the virtual text of the codelens
-
-		-- These groups are for the neovim tree-sitter highlights.
-		-- As of writing tree-sitter support is a WIP group names may change.
-		-- By default most of these groups link to an appropriate Vim group
-		-- TSError -> Error for example so you do not have to define these unless
-		-- you explicitly want to support Treesitter's improved syntax awareness.
-
-		-- highlight("TSAnnotation", {}) -- For C++/Dart attributes annotations that can be attached to the code to denote some kind of meta information.
-		-- highlight("TSAttribute", {}) -- unstable TODO: docs
-		-- highlight("TSBoolean", {}) -- For booleans.
-		-- highlight("TSCharacter", {}) -- For characters.
-		-- highlight("TSComment", {}) -- For comment blocks.
-		TSConstructor = { link = "Delimiter" }, -- For constructor calls and definitions: ` { })` in Lua and Java constructors.
-		-- highlight("TSConditional", {}) -- For keywords related to conditionnals.
-		-- highlight("TSConstant", {}) -- For constants
-		-- highlight("TSConstBuiltin", {}) -- For constant that are built in the language: `nil` in Lua.
-		-- highlight("TSConstMacro", {}) -- For constants that are defined by macros: `NULL` in C.
-		-- highlight("TSError", {}) -- For syntax/parser errors.
-		-- highlight("TSException", {}) -- For exception related keywords.
-		-- highlight("TSField", {}) -- For fields.
-		-- highlight("TSFloat", {}) -- For floats.
-		-- highlight("TSFunction", {}) -- For function calls and definitions.
-		-- highlight("TSFuncBuiltin", {}) -- For builtin functions: `table.insert` in Lua.
-		-- highlight("TSFuncMacro", {}) -- For macro defined fuctions calls and definitions: each `macro_rules` in Rust.
-		-- highlight("TSInclude", {}) -- For includes: `#include` in C `use` or `extern crate` in Rust or `require` in Lua.
-		-- highlight("TSKeyword", {}) -- For keywords that don't fall in previous categories.
-		-- highlight("TSKeywordFunction", {}) -- For keywords used to define a fuction.
-		-- highlight("TSLabel", {}) -- For labels: `label:` in C and `:label:` in Lua.
-		-- highlight("TSMethod", {}) -- For method calls and definitions.
-		-- highlight("TSNamespace", {}) -- For identifiers referring to modules and namespaces.
-		-- highlight("TSNone", {}) -- TODO: docs
-		-- highlight("TSNumber", {}) -- For all numbers
-		-- highlight("TSOperator", {}) -- For any operator: `+` but also `->` and `*` in C.
-		-- highlight("TSParameter", {}) -- For parameters of a function.
-		-- highlight("TSParameterReference", {}) -- For references to parameters of a function.
-		-- highlight("TSProperty", {}) -- Same as `TSField`.
-		-- highlight("TSPunctDelimiter", {}) -- For delimiters ie: `.`
-		-- highlight("TSPunctBracket", {}) -- For brackets and parens.
-		-- highlight("TSPunctSpecial", {}) -- For special punctutation that does not fall in the catagories before.
-		-- highlight("TSRepeat", {}) -- For keywords related to loops.
-		-- highlight("TSString", {}) -- For strings.
-		-- highlight("TSStringRegex", {}) -- For regexes.
-		-- highlight("TSStringEscape", {}) -- For escape characters within a string.
-		-- highlight("TSSymbol", {}) -- For identifiers referring to symbols or atoms.
-		-- highlight("TSType", {}) -- For types.
-		-- highlight("TSTypeBuiltin", {}) -- For builtin types.
-		-- highlight("TSVariable", { fg = colors.teal }) -- Any variable name that does not have another highlight.
-		-- highlight("TSVariableBuiltin", {}) -- Variable names that are defined by the languages like `this` or `self`.
-
-		-- highlight("TSTag", {}) -- Tags like html tag names.
-		-- highlight("TSTagDelimiter", {}) -- Tag delimiter like `<` `>` `/`
-		TSText = { link = "Normal" }, -- For strings considered text in a markup language.
-		["@text.emphasis"] = { link = "Italic" }, -- For text to be represented with emphasis.
-		["@text.underline"] = { link = "Underlined" }, -- For text to be represented with an underline.
-		["@text.strike"] = { strikethrough = true }, -- For strikethrough text.
-		-- highlight("TSTitle", {}) -- Text that is part of a title.
-		-- highlight("TSLiteral", {}) -- Literal text.
-		-- highlight("TSURI", {}) -- Any URI like a link or email.
+		Error = { link = "ErrorMsg" },
+		Todo = { fg = colors.yellow1 },
+		LspReferenceText = { underline = 1 },
+		LspReferenceRead = { link = "LspReferenceText" },
+		LspReferenceWrite = { link = "LspReferenceText" },
+		DiagnosticOk = { fg = colors.green },
+		DiagnosticError = { fg = colors.red },
+		DiagnosticWarn = { fg = colors.orange1 },
+		DiagnosticInfo = { fg = colors.green1 },
+		DiagnosticHint = { fg = colors.teal },
+		DiagnosticUnderlineError = { fg = "none" },
+		DiagnosticUnderlineWarning = { fg = "none" },
+		DiagnosticUnderlineInformation = { fg = "none" },
+		DiagnosticUnderlineHint = { fg = "none" },
+		LspCodeLens = { fg = colors.purple1 },
+		TSConstructor = { link = "Delimiter" },
+		TSText = { link = "Normal" },
+		["@text.emphasis"] = { link = "Italic" },
+		["@text.underline"] = { link = "Underlined" },
+		["@text.strike"] = { strikethrough = true },
 	}
 end
 
